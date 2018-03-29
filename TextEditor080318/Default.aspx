@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--This is a comment. Comments are not displayed in the browser-->
 <head runat="server">
     <title></title>
     <style>
@@ -11,23 +10,11 @@
         body {
             /*background-color: #404040;*/
             background-image: url(w202.png);
-            
         }
 
 </style>
 </head>
 <body>
-
-       <!-- background-color: #404040; -->
-       <!-- background-image: url("typesmalldark.png"); -->
-       <!-- background-image: url("text1grey.png"); --> 
-       <!-- background-repeat: repeat; -->
-       <!-- background-attachment: fixed; -->
-       <!-- background-position: center; -->
-       <!-- height: 0px; -->
-
-<!--    <h1>TEXT EDITORS FOR WRITERS</h1> -->
-<!--    <div id="example1">   -->
 
     <form id="form1" runat="server">
    <!--     <div style = "height: 455px; width: 966px; font-weight: bold; border-radius: 15px; padding: 20px; background-color: #bfbfbf; position: absolute; top:0px; bottom: 0px; left: 0px; right: 0px; margin: auto;">    #d966ff    -->

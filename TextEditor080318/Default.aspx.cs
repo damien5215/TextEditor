@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Damien Bactawar, 29/03/18, Text Editor Code for www.damienasp.com
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,7 +38,7 @@ public partial class _Default : System.Web.UI.Page
 
             for (i = 0; i <= (wordArray2.Length - 2); i++)                           // -2 because last value of array is empty
             {
-                totalWords += wordArray2[i];                                         // calculates total number of words
+                totalWords += wordArray2[i];                                         // Calculates total number of words
             }
 
             TextBox2.Text = "PARAGRAPH: There are a total of " + totalWords + " words and there are a total of " + (sentenceArray.Length - 1) + " sentences." + Environment.NewLine + Environment.NewLine;
@@ -70,59 +72,44 @@ public partial class _Default : System.Web.UI.Page
         string text1 = TextBox1.Text.Replace(",", "").Replace(".", "").Replace("!", "").Replace("?", "").ToLower();
         text1 = text1.Replace("(", "").Replace(")", "").Replace("'", "").Replace(";", "");
 
-        if (TextBox1.Text == "")                                                          // IF INPUT TEXT BOX IS EMPTY
+        if (TextBox1.Text == "")                                                          // If input-textbox is empty
         {
-            TextBox1.Text = "Please type in some text.";
+            TextBox1.Text = "Please type in some text.";                                  // Prompt user
         }
         else
         {
-            TextBox2.Text = "";
+            TextBox2.Text = "";                                                           // Clear output-textbox
 
-            String[] wordArray = text1.Split(' ');
+            String[] wordArray = text1.Split(' ');                                        // Array of words from input-textbox
+                                                                                          // Punctuation removed , . ! ? ( ) ' ;
+                int[] numberOfRepeats = new int[(wordArray.Length)];                      // Array of numbers which indicates how many 
+                                                                                          // times each word appears in the text
 
-            for (int q = 0; q <= (wordArray.Length - 1); q++)
-                {
-                    TextBox2.Text += wordArray[q] + "\n";
-                }
+                int counter = 0;                                                          // Counter for word-matches
+                int highestNumber = 0;                                                    // Holds highest number
+                int highestNumberIndex = 0;                                               // Holds index of highest number (q5)
 
-                TextBox2.Text += "" + wordArray.Length;
-                //TextBox2.Text = mainString2;
-
-                int[] numberOfRepeats = new int[(wordArray.Length)];
-                int q3 = 0;
-                int highestNumber = 0;  // determine highest number.
-                int q5 = 0;  // holds index of highest number.
-
-                for (int q = 0; q <= (wordArray.Length - 1); q++)
+                for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Nested for-loop compares list to itself
                 {
                     for (int q2 = 0; q2 <= (wordArray.Length - 1); q2++)
                     {
-                        if ((wordArray[q2] == wordArray[q]) && (q2 != q))
-
-                        {
-                            q3++;
+                        if ((wordArray[q2] == wordArray[q]) && (q2 != q))                 // If words match and array-index is not equal
+                        {                                                                 
+                            counter++;                                                    // Increment word-match-counter 
                         }
-                        //TextBox2.Text += wordArray[q] + "\n";
                     }
-
-                    numberOfRepeats[q] = q3;
-                    q3 = 0;
-                    //TextBox2.Text += wordArray[q] + "\n";
+                    numberOfRepeats[q] = counter;                                         // After looping through for one word, store its
+                    counter = 0;                                                          // frequency and reset word-match-counter
                 }
 
-                for (int q = 0; q <= (wordArray.Length - 1); q++)
+                for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Determines the highest word-frequency
                 {
-                    TextBox2.Text += numberOfRepeats[q] + "\n";     // prints out a list of numbers(repeats)
-                }
-
-                for (int q = 0; q <= (wordArray.Length - 1); q++)   // find and stores highest number and it's index
-                {
-                    if (numberOfRepeats[q] > highestNumber)
+                    if (numberOfRepeats[q] > highestNumber)                               // If word-freq number is bigger
                     {
-                        highestNumber = numberOfRepeats[q];
-                        q5 = q;
+                        highestNumber = numberOfRepeats[q];                               // Load highestNumber variable
+                        highestNumberIndex = q;                                           // Store the index
                     }
-                    TextBox2.Text = "The word " + "\"" + wordArray[q5] + "\"" + " is the most frequently occuring word and it appears " + (highestNumber + 1) + " times.";
+                    TextBox2.Text = "The word " + "\"" + wordArray[highestNumberIndex] + "\"" + " is the most frequently occuring word and it appears " + (highestNumber + 1) + " times.";
                 }
             }
     }
@@ -135,7 +122,6 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button8_Click(object sender, EventArgs e)
     {
-     // TextBox1.Text = "The search function can only be used when a paragraph is entered." + "\n" + "\n" + "\"Fighting is fun and sometimes you have no where to run, you've got to fight.\"" + "\n" + "\n" + "\"When I was a kid I used to beat my little brother senseless and eventually he got better at taking a punch.\"" + "\n" + "\n" + "\"Now he's an amateur boxer, feather weight class, he's a good fighter now and that's partly because of me.\"";
         TextBox2.Text = "OUTPUT TEXTBOX: GENERAL RULES FOR GOOD PROSE" + "\n" + "\n" + "The best selling literary author Martin Amis once described writing as a war-on-cliches" + "\n" + "\n" + "The literary agent Jonny Gellar (Curtis Brown) believes that varying the length of each sentence makes prose more engaging." + "\n" + "\n" + "Some readers like novels that use phonetic-spellings to model the way speech is spoken in different dialects (A Clockwork Orange, Trainspotting, etc).";
         TextBox1.Text = "";
         TextBox3.Text = "";
@@ -258,13 +244,3 @@ public partial class _Default : System.Web.UI.Page
         }
     }                                                                                 // End of Analyse Text block
 }                                                                                     // End of Code
-
-//        if (TextBox1.Text == "40352")
-//          {
-//            TextBox2.Text = "Subtle he needs be, he who could seduce angels." + "\n" + "\n" + "He who makes a beast of himself gets rid of the pain of being a man (or woman)." + "\n" + "\n" + "A lie which is half true is ever the blackest of lies." + "\n" + "\n" + "The limits of my language means the limits of my world." + "\n" + "\n" + "Freedom is what you do with what's been done to you.";
-//          }
-
-//        else
-//          {       
-
-//          } // end of else (secret code)
