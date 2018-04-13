@@ -1,6 +1,5 @@
 ﻿// Damien Bactawar, 29/03/18, Text Editor Code for www.damienasp.com
-
-using System;
+using System;                                                  
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,16 +10,15 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Cliches to put in "smart as a fox", "at the end of the day", "let's face it", "to be honest", "agree to disagree"
         // TextBox1.Text = "INPUT TEXTBOX: TEXT EDITOR APP" + "\n" + "\n" + "Please write (or paste) a paragraph or a few lines of dialogue into the LEFT textbox or use one of the three example buttons to load the textbox. Then click on one of the functions.";
         TextBox2.Text = "OUTPUT TEXTBOX: GENERAL RULES FOR GOOD PROSE" + "\n" + "\n" + "The best selling literary author Martin Amis once described writing as a war-on-cliches" + "\n" + "\n" + "The literary agent Jonny Gellar (Curtis Brown) believes that varying the length of each sentence makes prose more engaging." + "\n" + "\n" + "Some readers like novels that use phonetic-spellings to model the way speech is spoken in different dialects (A Clockwork Orange, Trainspotting, etc).";
     }
 
     protected void Button1_Click(object sender, EventArgs e)                         // WORD COUNT
     {
-        if (TextBox1.Text == "")                                                     // If input textBox is EMPTY return message     
+        if (TextBox1.Text == "")                                                     // If input textBox is EMPTY     
         {
-            TextBox1.Text = "Please type in some text.";
+            TextBox1.Text = "Please type in some text.";                             // Prompt user
         }
         else                                                                         // Convert ?/! to . and create array of sentences
         {
@@ -52,9 +50,9 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button2_Click(object sender, EventArgs e)                         // SLANG CONVERTER
     {
-        if(TextBox1.Text == "")
+        if(TextBox1.Text == "")                                                      // If input textBox is EMPTY return message   
         {
-            TextBox1.Text = "Please type in some text.";
+            TextBox1.Text = "Please type in some text.";                             // Prompt user
         }
         else
         {
@@ -67,51 +65,50 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    protected void Button3_Click(object sender, EventArgs e)                              // WORD FREQ TEST
+    protected void Button3_Click(object sender, EventArgs e)                          // WORD FREQ TEST
     {
-        string text1 = TextBox1.Text.Replace(",", "").Replace(".", "").Replace("!", "").Replace("?", "").ToLower();
-        text1 = text1.Replace("(", "").Replace(")", "").Replace("'", "").Replace(";", "");
 
-        if (TextBox1.Text == "")                                                          // If input-textbox is empty
+        if (TextBox1.Text == "")                                                      // If input-textbox is empty
         {
-            TextBox1.Text = "Please type in some text.";                                  // Prompt user
+            TextBox1.Text = "Please type in some text.";                              // Prompt user
         }
         else
         {
-            TextBox2.Text = "";                                                           // Clear output-textbox
+            TextBox2.Text = "";                                                       // Clear output-textbox
+            string test3 = TextBox1.Text;                                             // Data from input-text-box
+            test3 = formatStringClass.formatString(test3);                            // Remove punctuation , . ! ? ( ) ' ;
 
-            String[] wordArray = text1.Split(' ');                                        // Array of words from input-textbox
-                                                                                          // Punctuation removed , . ! ? ( ) ' ;
-                int[] numberOfRepeats = new int[(wordArray.Length)];                      // Array of numbers which indicates how many 
-                                                                                          // times each word appears in the text
+            String[] wordArray = test3.Split(' ');                                    // Array of words from input-textbox                                                                                     
+            int[] numberOfRepeats = new int[(wordArray.Length)];                      // Array of numbers which indicates how many 
+                                                                                      // times each word appears in the text
 
-                int counter = 0;                                                          // Counter for word-matches
-                int highestNumber = 0;                                                    // Holds highest number
-                int highestNumberIndex = 0;                                               // Holds index of highest number (q5)
+            int counter = 0;                                                          // Counter for word-matches
+            int highestNumber = 0;                                                    // Holds highest number
+            int highestNumberIndex = 0;                                               // Holds index of highest number
 
-                for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Nested for-loop compares list to itself
+            for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Nested for-loop compares list to itself
+            {
+                for (int q2 = 0; q2 <= (wordArray.Length - 1); q2++)
                 {
-                    for (int q2 = 0; q2 <= (wordArray.Length - 1); q2++)
-                    {
-                        if ((wordArray[q2] == wordArray[q]) && (q2 != q))                 // If words match and array-index is not equal
-                        {                                                                 
-                            counter++;                                                    // Increment word-match-counter 
-                        }
+                    if ((wordArray[q2] == wordArray[q]) && (q2 != q))                 // If words match and array-index is not equal
+                    {                                                                 
+                        counter++;                                                    // Increment word-match-counter 
                     }
-                    numberOfRepeats[q] = counter;                                         // After looping through for one word, store its
-                    counter = 0;                                                          // frequency and reset word-match-counter
                 }
-
-                for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Determines the highest word-frequency
-                {
-                    if (numberOfRepeats[q] > highestNumber)                               // If word-freq number is bigger
-                    {
-                        highestNumber = numberOfRepeats[q];                               // Load highestNumber variable
-                        highestNumberIndex = q;                                           // Store the index
-                    }
-                    TextBox2.Text = "The word " + "\"" + wordArray[highestNumberIndex] + "\"" + " is the most frequently occuring word and it appears " + (highestNumber + 1) + " times.";
-                }
+                numberOfRepeats[q] = counter;                                         // After looping through for one word, store its
+                counter = 0;                                                          // frequency and reset word-match-counter
             }
+
+            for (int q = 0; q <= (wordArray.Length - 1); q++)                         // Determines the highest word-frequency
+            {
+                if (numberOfRepeats[q] > highestNumber)                               // If word-freq number is bigger
+                {
+                    highestNumber = numberOfRepeats[q];                               // Load highestNumber variable
+                    highestNumberIndex = q;                                           // Store the index
+                }
+                TextBox2.Text = "The word " + "\"" + wordArray[highestNumberIndex] + "\"" + " is the most frequently occuring word and it appears " + (highestNumber + 1) + " times.";
+            }
+        }
     }
 
     protected void Button6_Click(object sender, EventArgs e)                                   // Example 3 Button      
@@ -159,16 +156,11 @@ public partial class _Default : System.Web.UI.Page
             else
             {
                 TextBox2.Text = "";                                                  // Clear the output textbox
+                string test2 = TextBox1.Text;                                        // String for input-textbox
+                test2 = formatStringClass.formatString(test2);                       // Remove punctuation , . ! ? ( ) ' ;
 
-                string TBoxString = TextBox1.Text.Replace('.',' ').Replace(',', ' ').Replace('"', ' ').ToLower();     // Remove '.' ',' '"'
-                TBoxString = TBoxString.Replace('!', ' ').Replace('(', ' ').Replace(')', ' ').Replace('?', ' ');      // Remove '!' '(' ')' '?'
-
-                String[] wordArrayD1 = TBoxString.Split(' ');                        // Create array of words (no punctuation)
-                String[] wordArrayD2 = TextBox1.Text.Split(' ');                     // Create array of words (normal text)
-
-                wordArrayD1 = wordArrayD1.Where(w => w != wordArrayD1[wordArrayD1.Length-1]).ToArray();             
-                // Removes last element in no-punctuation array so that the 2 arrays are the same length
-                // Caused by the Replace('.',' ') + Split('.',' '), it creates an extra element which is blank                        
+                String[] wordArrayD1 = test2.Split(' ');                             // Create array of words (no punctuation)
+                String[] wordArrayD2 = TextBox1.Text.Split(' ');                     // Create array of words (normal text)                       
 
                 for (int b9 = 0; b9 <= (wordArrayD1.Length - 1); b9++)               // Loop through each word (no punctuation) 
                 {
@@ -186,61 +178,78 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    protected void Button9_Click(object sender, EventArgs e)                          // ANALYSE-TEXT BUTTON
+    protected void Button9_Click(object sender, EventArgs e)                             // ANALYSE-TEXT BUTTON
     {
+        if (TextBox1.Text == "")                                                         // If input textBox is EMPTY     
+        {
+            TextBox1.Text = "Please type in some text.";                                 // Prompt user
+        }
+        else                                                                             
+        {
+            TextBox2.Text = "";                                                          // Clear the output textbox
 
-        TextBox2.Text = "";                                                           // Clear the output textbox
-        string textboxToString5 = TextBox1.Text.ToLower();                            // Textbox to string and lower the case
-        textboxToString5.Replace(",", "").Replace(".", "").Replace("'", "");          // Remove punctuation (, . ')
-        String[] wordArray = textboxToString5.Split(' ');                             // Create array of words
+            string test = TextBox1.Text;                                                 // String from input-textbox
+            test = formatStringClass.formatString(test);                                 // Remove punctuation , . ! ? ( ) ' ;
+            String[] wordArray = test.Split(' ');                                        // Create array of words
 
-        bool containsRacism = false;                                                  // Flag for racist content 
-        bool containsExpletive = false;                                               // Flag for expletive content
+            bool containsRacism = false;                                                 // Flag for racist content 
+            bool containsExpletive = false;                                              // Flag for expletive content
 
-        string[] badWords1 = new string[2]  {"nigger", "niggers"};
-        string[] badWords2 = new string[17] {"fuck", "fucks", "fucker", "fuckers", "fucking", "fucked",
+            string[] badWords1 = new string[2]  {"nigger", "niggers"};
+            string[] badWords2 = new string[17] {"fuck", "fucks", "fucker", "fuckers", "fucking", "fucked",
                                              "shit", "shits", "shitty", "shiter", "shiting", "shitstorm",
                                              "piss", "pissing", "pissed", "cunt", "cunts"};
 
-        foreach (string element1 in wordArray)                                        // Steps through each word from text box
-        {
-            foreach(string element2 in badWords1)                                     // Steps through racist word array
+            foreach (string element1 in wordArray)                                       // Steps through each word from text box
             {
-                if(element1 == element2)
+                foreach(string element2 in badWords1)                                    // Steps through racist word array
                 {
-                    containsRacism = true;                                            // Flag for racist content
-                    break;                                                            // Move onto next foreach loop
+                    if(element1 == element2)
+                    {
+                        containsRacism = true;                                           // Flag for racist content
+                        break;                                                           // Move onto next foreach loop
+                    }
                 }
-            }
 
-            foreach (string element3 in badWords2)                                    // Steps through expletive word array
-            {
-                if (element1 == element3)
+                foreach (string element3 in badWords2)                                   // Steps through expletive word array
                 {
-                    containsExpletive = true;                                         // Flag for expletive content
-                    break;                                                            // Move onto next word from the text box
+                    if (element1 == element3)
+                    {
+                        containsExpletive = true;                                        // Flag for expletive content
+                        break;                                                           // Move onto next word from the text box
+                    }
                 }
-            }
-        }                                                                             // End of nested Foreach loop
+            }                                                                            // End of nested Foreach loop
                                                                  
-        if ((containsRacism == true) && (containsExpletive == true))            
-        {
-            TextBox2.Text = "The user has entered content which contains 'EXPLETIVES' and contains language which is 'RACIST'";
-        }
+            if ((containsRacism == true) && (containsExpletive == true))            
+            {
+                TextBox2.Text = "The user has entered content which contains 'EXPLETIVES' and contains language which is 'RACIST'";
+            }
 
-        else if ((containsExpletive == true))                                   
-        {
-            TextBox2.Text = "The user has entered content which contains 'EXPLETIVES'";
-        }
+            else if ((containsExpletive == true))                                   
+            {
+                TextBox2.Text = "The user has entered content which contains 'EXPLETIVES'";
+            }
 
-        else if (containsRacism == true)                                        
-        {
-            TextBox2.Text = "The user has entered content which contains language that is 'RACIST'";
-        }
+            else if (containsRacism == true)                                        
+            {
+                TextBox2.Text = "The user has entered content which contains language that is 'RACIST'";
+            }
 
-        else                                                       
-        {
-            TextBox2.Text = "No offensive words.";
-        }
-    }                                                                                 // End of Analyse Text block
-}                                                                                     // End of Code
+            else                                                       
+            {
+                TextBox2.Text = "No offensive words.";
+            }
+        }                                                                                 
+    }                                                                                     // End of Analyse Text block
+}                                                                                         // End of partial class _Default
+
+public static class formatStringClass                                                     
+{
+    public static string formatString(string formatString)                                // Public method returns string
+    {
+        formatString = formatString.Replace(",", "").Replace(".", "").Replace("!", "").Replace("?", "").ToLower();
+        formatString = formatString.Replace("'", "").Replace("(", "").Replace(")", "").Replace(";", "");
+        return formatString;
+    }                                                                                     // Remove punctuation , . ! ? ( ) ' ;
+}
