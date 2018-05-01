@@ -17,7 +17,7 @@
 <body>
 
     <form id="form1" runat="server">
-   <!--     <div style = "height: 455px; width: 966px; font-weight: bold; border-radius: 15px; padding: 20px; background-color: #bfbfbf; position: absolute; top:0px; bottom: 0px; left: 0px; right: 0px; margin: auto;">    #d966ff    -->
+   
 
          <div style = "height: 455px; width: 966px; font-weight: bold; border-radius: 15px; border-style: solid; border-width:5px; border-color:black; padding: 20px; background-color: white; position: absolute; top:0px; bottom: 0px; left: 0px; right: 0px; margin: auto;">
 
@@ -34,7 +34,7 @@
         <br />
         <asp:Button ID="Button6" runat="server" Text="Example 3" Width="150px" OnClick="Button6_Click" Font-Bold="True" BackColor="#999999"/>
             A question (Use Slang Converter).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button8" runat="server" Text="RESET" Width="150px" OnClick="Button8_Click" Font-Bold="True" BackColor="#999999"/>
+        <asp:Button ID="Button8" runat="server" Text="RESET" Width="150px" OnClick="Button8_Click" OnClientClick="resetColor();" Font-Bold="True" BackColor="#999999"/>
             <br />
         <br />
         <asp:Button ID="Button1" runat="server" Text="Word Count" OnClick="Button1_Click" Width="150px" font-weight="bold" BackColor="#999999" Font-Bold="True" />
@@ -51,14 +51,14 @@
             <asp:TextBox ID="TextBox3" runat="server" BackColor="Black" ForeColor="White"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="Button9" runat="server" BackColor="#999999" Text="Analyze Text" Width="150px" OnClick="Button9_Click" Font-Bold="True"/>
+            <asp:Button ID="Button9" runat="server" BackColor="#999999" Text="Analyze Text" Width="150px" OnClick="Button9_Click" OnClientClick="inputColor();" Font-Bold="True"/>
             Finds out whether the text in the input box contains &quot;offensive&quot; language.<br/>
-
     
     </div>
 
-
     </form>
-<!--   </div>  -->
+
+    <script src="externalJavascript.js"></script>
+
 </body>
 </html>
