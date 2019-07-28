@@ -24,7 +24,7 @@
         <!-- <br/> -->
 
         <asp:TextBox ID="TextBox1" runat="server" Height="170px" Width="475px" TextMode="MultiLine" BackColor="#000000" ForeColor="White"></asp:TextBox>
-        <asp:TextBox ID="TextBox2" runat="server" Height="170px" TextMode="MultiLine" Width="475px" BackColor="#000000" ForeColor="White" ReadOnly="True"></asp:TextBox>
+        <asp:TextBox ID="TextBox2" runat="server" Height="170px" TextMode="MultiLine" Width="475px" BackColor="#000000" ForeColor="White"></asp:TextBox>
         <br />
         <br />
         <asp:Button ID="Button4" runat="server" Text="Example 1" Width="150px" font-weight="bold" OnClick="Button4_Click" Font-Bold="True" BackColor="#999999"/>

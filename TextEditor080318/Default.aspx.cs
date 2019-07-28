@@ -20,31 +20,25 @@ public partial class _Default : System.Web.UI.Page
         {
             TextBox1.Text = "Please type in some text.";                             // Prompt user
         }
-        else                                                                         // Convert ?/! to . and create array of sentences
-        {
-            String[] sentenceArray = TextBox1.Text.Replace('?','.').Replace('!', '.').Split('.');
+        else                                                                         
+        {      
+            int totalWords = 0;
+            string result = "";
+            string splitOn = ".";
+            string string1 = TextBox1.Text.Replace('?', '.').Replace('!', '.').Replace(". ", ".");
 
-            int[] wordArray2 = new int[(sentenceArray.Length)];                      // Number of sentences determines size of wordArray
-            int totalWords = 0;                                                      // Variable for total number of words
-            int i;                                                                   // Local variable for for-loops 
+            String[] sentenceArray = string1.Split(splitOn.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            int[] wordArr = new int[(sentenceArray.Length)];
 
-            for (i = 1; i <= (sentenceArray.Length - 1); i++)
+            for (int i = 0; i < sentenceArray.Length; i++)
             {
-                wordArray2[0] = sentenceArray[0].Split(' ').Length;                  // Number of words, in each sentence, put into a 
-                wordArray2[i] = sentenceArray[i].Split(' ').Length - 1;              // number of int-arrays (sentence3 = 4 words)
+                wordArr[i] = sentenceArray[i].Split(' ').Length;           
+                totalWords += wordArr[i];
+                result += "Sentence " + (i + 1) + " contains " + wordArr[i] + " words." + "\n";
             }
 
-            for (i = 0; i <= (wordArray2.Length - 2); i++)                           // -2 because last value of array is empty
-            {
-                totalWords += wordArray2[i];                                         // Calculates total number of words
-            }
-
-            TextBox2.Text = "PARAGRAPH: There are a total of " + totalWords + " words and there are a total of " + (sentenceArray.Length - 1) + " sentences." + Environment.NewLine + Environment.NewLine;
-
-            for (i = 0; i <= (wordArray2.Length - 2); i++)                           // -2 because last value of array is empty
-            {
-                TextBox2.Text += "Sentence " + (i + 1) + " contains " + wordArray2[i] + " words." + "\n";
-            }
+            result += "\n" + "There are a total of " + totalWords + " words and there are a total of " + (sentenceArray.Length) + " sentences.";
+            TextBox2.Text = result;            
         }
     }
 
